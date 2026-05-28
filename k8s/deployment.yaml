@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      imagePullSecrets:
+      - name: dockerhub-secret
+      containers:
+      - name: hello
+        image: sreejak04/helloworld:v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
